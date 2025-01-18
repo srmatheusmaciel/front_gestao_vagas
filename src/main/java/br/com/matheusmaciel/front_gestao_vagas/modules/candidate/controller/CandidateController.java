@@ -32,5 +32,11 @@ public class CandidateController {
             redirectAttributes.addFlashAttribute("error_message", "Usuário ou senha incorretos");
             return "redirect:/candidate/login";
         }
+
+    }
+
+    @GetMapping("/profile")
+    public String profile(){
+        return "candidate/profile";
     }
 }
