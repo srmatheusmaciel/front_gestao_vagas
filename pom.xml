@@ -12,7 +12,7 @@
 	<artifactId>front_gestao_vagas</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>front_gestao_vagas</name>
-	<description>Demo project for Spring Boot</description>
+	<description>Frontend Gestão de Vagas</description>
 	<url/>
 	<licenses>
 		<license/>
@@ -50,6 +50,26 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+
+			
+		<dependency>
+				<groupId>org.thymeleaf.extras</groupId>
+				<artifactId>thymeleaf-extras-springsecurity6</artifactId>
+				<version>3.1.2.RELEASE</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>1.18.36</version>
+		</dependency>
+
+
 	</dependencies>
 
 	<build>
