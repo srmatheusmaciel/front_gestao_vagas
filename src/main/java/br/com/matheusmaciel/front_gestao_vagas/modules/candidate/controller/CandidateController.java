@@ -72,4 +72,10 @@ public class CandidateController {
 
         }
     }
+
+    @GetMapping("/jobs")
+    @PreAuthorize("hasRole('CANDIDATE')")
+    public String  jobs(){
+        return "candidate/jobs";
+    }
 }
