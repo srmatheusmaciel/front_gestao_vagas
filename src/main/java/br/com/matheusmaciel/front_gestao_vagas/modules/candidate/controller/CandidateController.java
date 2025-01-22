@@ -21,6 +21,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import br.com.matheusmaciel.front_gestao_vagas.modules.candidate.dto.CreateCandidateDTO;
 import br.com.matheusmaciel.front_gestao_vagas.modules.candidate.service.ApplyJobService;
 import br.com.matheusmaciel.front_gestao_vagas.modules.candidate.service.CandidateService;
+import br.com.matheusmaciel.front_gestao_vagas.modules.candidate.service.CreateCandidateService;
 import br.com.matheusmaciel.front_gestao_vagas.modules.candidate.service.FindJobsService;
 import br.com.matheusmaciel.front_gestao_vagas.modules.candidate.service.ProfileCandidateService;
 import jakarta.servlet.http.HttpSession;
@@ -39,6 +40,9 @@ public class CandidateController {
     @Autowired
     private ProfileCandidateService profileCandidateService;
 
+     @Autowired
+    private CreateCandidateService createCandidateService;
+
     
     @Autowired
     private ApplyJobService applyJobService;
@@ -56,8 +60,12 @@ public class CandidateController {
     }
     @PostMapping("/create")
     public String save(CreateCandidateDTO candidate, Model model){
-        System.out.println(candidate.getName());
-        model.addAttribute("candidate", candidate);
+        try{
+            this.createCandidateService.execute(candidate);
+            
+        }catch(HttpClientErrorException ex){
+            model.addAttribute("error_message", ex.getMessage());
+        }    
         return "candidate/create";
     }
 
