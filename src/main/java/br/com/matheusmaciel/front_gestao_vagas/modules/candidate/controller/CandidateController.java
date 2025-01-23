@@ -24,6 +24,7 @@ import br.com.matheusmaciel.front_gestao_vagas.modules.candidate.service.Candida
 import br.com.matheusmaciel.front_gestao_vagas.modules.candidate.service.CreateCandidateService;
 import br.com.matheusmaciel.front_gestao_vagas.modules.candidate.service.FindJobsService;
 import br.com.matheusmaciel.front_gestao_vagas.modules.candidate.service.ProfileCandidateService;
+import br.com.matheusmaciel.front_gestao_vagas.utils.FormatErrorMessage;
 import jakarta.servlet.http.HttpSession;
 
 
@@ -126,7 +127,7 @@ public class CandidateController {
                 model.addAttribute("jobs", jobs);
             }
         }catch(HttpClientErrorException e){
-            return "redirect:/candidate/login";
+            model.addAttribute("error_message", FormatErrorMessage.formatErrorMessage(e.getResponseBodyAsString()));
         }
         return "candidate/jobs";
     }
