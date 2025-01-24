@@ -65,7 +65,7 @@ public class CandidateController {
             this.createCandidateService.execute(candidate);
             
         }catch(HttpClientErrorException ex){
-            model.addAttribute("error_message", ex.getMessage());
+            model.addAttribute("error_message", FormatErrorMessage.formatErrorMessage(ex.getResponseBodyAsString()));
         }    
         return "candidate/create";
     }
