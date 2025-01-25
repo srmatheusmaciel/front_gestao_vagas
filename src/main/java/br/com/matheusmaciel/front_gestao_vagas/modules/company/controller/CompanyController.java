@@ -1,6 +1,7 @@
 package br.com.matheusmaciel.front_gestao_vagas.modules.company.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContext;
@@ -70,5 +71,12 @@ public class CompanyController {
             return "redirect:/company/jobs";
         }
     }
+
+    @GetMapping("/jobs")
+    @PreAuthorize("hasRole('COMPANY')")
+    public String jobs(){
+        return "company/jobs";
+    }
+
 
 }
