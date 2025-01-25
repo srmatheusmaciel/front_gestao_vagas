@@ -13,26 +13,33 @@ import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.HttpClientErrorException.Unauthorized;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
+import org.springframework.beans.factory.annotation.Value;
 
 import br.com.matheusmaciel.front_gestao_vagas.modules.candidate.dto.JobDTO;
+
 @Service
 public class FindJobsService {
-    
-      public List<JobDTO> execute(String token, String filter) {
+
+    @Value("${host.api.gestao.vagas}")
+    private String hostAPIGestaoVagas;
+
+    public List<JobDTO> execute(String token, String filter) {
         RestTemplate rt = new RestTemplate();
         HttpHeaders headers = new HttpHeaders();
         headers.setBearerAuth(token);
         HttpEntity<Map<String, String>> request = new HttpEntity<>(headers);
-        UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl("http://localhost:8080/candidate/job")
-        .queryParam("filter", filter);
+        var url = hostAPIGestaoVagas.concat("/candidate/job");
+        UriComponentsBuilder builder = UriComponentsBuilder.fromUriString(url)
+                .queryParam("filter", filter);
 
-        ParameterizedTypeReference<List<JobDTO>> responseType = new ParameterizedTypeReference<List<JobDTO>>() {};
+        ParameterizedTypeReference<List<JobDTO>> responseType = new ParameterizedTypeReference<List<JobDTO>>() {
+        };
 
-        try{
+        try {
             var result = rt.exchange(builder.toUriString(), HttpMethod.GET, request, responseType);
             System.out.println(result);
             return result.getBody();
-        }catch(Unauthorized ex){
+        } catch (Unauthorized ex) {
             throw new HttpClientErrorException(HttpStatus.UNAUTHORIZED);
         }
     }
