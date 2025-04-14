@@ -43,7 +43,7 @@ O frontend da aplicacao Gestao Vagas foi desenvolvido utilizando **Spring Boot**
    ```sh
    mvn spring-boot:run
    ```
-4. A aplicação estará disponivel em `http://localhost:8080`
+4. A aplicação estará disponivel em `http://localhost:8082`
 
 ## Estrutura do Projeto
 
